@@ -30,24 +30,28 @@ const SendEmailConfiguration = () => {
                 </div>
                 <div className='email-list-table'>
                     <table>
-                        <tr>
-                            <th>S No.</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Sent</th>
-                            <th>Mail Type</th>
-                            <th>Actions</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Ankit</td>
-                            <td>ankitkumar1878@gmail.com</td>
-                            <td className=' '>Sent</td>
-                            <td>0</td>
-                            <td>gmail</td>
-                            <td className='flex gap-2'> <Pencil className='cursor-pointer' size={18} /> <Trash2 className='cursor-pointer' /> </td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Sent</th>
+                                <th>Mail Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Ankit</td>
+                                <td>ankitkumar1878@gmail.com</td>
+                                <td className=' '>Sent</td>
+                                <td>0</td>
+                                <td>gmail</td>
+                                <td className='flex gap-2'> <Pencil className='cursor-pointer' size={18} /> <Trash2 className='cursor-pointer' /> </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 {isModalOpen && (

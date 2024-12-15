@@ -22,18 +22,22 @@ const EmailList = () => {
 
           <div className='email-list-table'>
             <table>
-              <tr>
-                <th>S No.</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>ankitkumar1878@gmail.com</td>
-                <td>Not Send</td>
-                <td> <Trash2 /> </td>
-              </tr>
+              <thead>
+                <tr>
+                  <th>S No.</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>ankitkumar1878@gmail.com</td>
+                  <td>Not Send</td>
+                  <td> <Trash2 /> </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
