@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './css/Sidebar.css';
 import { Home, List, History, ChartNoAxesColumnIncreasing, User, Settings, HelpCircle, Menu } from 'lucide-react';
-import { Link } from '../context/link';
+import { LinkContext } from '../context/LinkContext';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
-    const { content, setContent } = useContext(Link);
+    const { content, setContent } = useContext(LinkContext);
     const [listOpen, setListOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();

@@ -1,13 +1,10 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import './css/Dashboard.css'
-import { Link } from '../context/link'
 import { User, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from 'react'
 
 const Dashboard = () => {
-  const { content, setContent } = useContext(Link)
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
