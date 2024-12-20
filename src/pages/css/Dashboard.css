@@ -10,6 +10,7 @@
     position: relative;
     background-color: white;
     z-index:99 ;
+    position: relative;
 }
 
 
@@ -18,10 +19,15 @@
 .dashboard-nav{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem 0;
 
 }
 
+.user-over{
+    background-image: url("../../assets/user-bg.jpg");
+    background-size: cover;
+}
 .email-list{
     display: flex;
     justify-content: space-between;
