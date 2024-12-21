@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer} from 'react-toastify';
 import {Layout , Landing, Login, Signup , Dashboard, History, Reports, Profile, Settings,Help, NoPage, EmailBody, EmailList, SendEmailConfiguration} from './pages/index.js';
 import { LinkContext } from './context/LinkContext.js';
 function App() {
   const [content, setContent]= useState('dashboard')
   return (
     <>
+      <ToastContainer/>
       <LinkContext.Provider value={{ content, setContent }}>
         <BrowserRouter>
           <Routes>
