@@ -1,8 +1,40 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {toast} from "react-toastify";
 import { NavLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
     const navigate = useNavigate();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const handleSubmint = async (e)=>{
+        e.preventDefault();
+        if(password!==confirmPassword){
+            toast.error("Passwords do not match");
+            return;
+        }
+        
+        try{
+            setLoading(true);
+            const response = await axios.post("http://localhost:5000/api/users/register",
+                { name, email, password }
+            );
+            const { accessToken } = response.data;
+            localStorage.setItem("token",accessToken);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+            toast.success("User created successfully. You can now login.");
+            navigate("/login");
+        }catch(e){
+            toast.error(e.message);            
+        }finally{
+            setLoading(false);
+        }
+        return;
+    }
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 via-purple-100 to-white px-4 sm:px-6 lg:px-8">
             <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
@@ -14,7 +46,7 @@ const Signup = () => {
                 </p>
 
                 {/* Form */}
-                <form className="mt-8 space-y-6">
+                <form className="mt-8 space-y-6" onSubmit={handleSubmint}>
                     {/* Name Field */}
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -24,6 +56,8 @@ const Signup = () => {
                             id="name"
                             name="name"
                             type="text"
+                            value={name}
+                            onChange={(e)=>setName(e.target.value)}
                             required
                             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                             placeholder="Enter your full name"
@@ -39,6 +73,8 @@ const Signup = () => {
                             id="email"
                             name="email"
                             type="email"
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
                             required
                             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                             placeholder="Enter your email"
@@ -54,6 +90,8 @@ const Signup = () => {
                             id="password"
                             name="password"
                             type="password"
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
                             required
                             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                             placeholder="Create a password"
@@ -69,26 +107,12 @@ const Signup = () => {
                             id="confirm-password"
                             name="confirm-password"
                             type="password"
+                            value={confirmPassword}
+                            onChange={(e)=>setConfirmPassword(e.target.value)}
                             required
                             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                             placeholder="Confirm your password"
                         />
-                    </div>
-
-                    {/* Terms and Conditions */}
-                    <div className="flex items-center">
-                        <input
-                            id="terms"
-                            name="terms"
-                            type="checkbox"
-                            required
-                            className="h-4 w-4 text-purple-600 focus:ring-purple-50 border-gray-300 rounded" />
-                        <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                            I agree to the{' '}
-                            <a href="#" className="text-purple-600 font-medium hover:text-purple-500">
-                                Terms and Conditions
-                            </a>
-                        </label>
                     </div>
 
                     {/* Submit Button */}
