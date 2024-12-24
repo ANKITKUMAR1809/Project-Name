@@ -18,10 +18,10 @@ const Landing = () => {
                 </p>
 
                 {/* Call to Action */}
-                <p className="mt-6 text-lg font-medium">Send Your First 1000 Emails Free</p>
+                <p className="mt-6 text-lg font-medium mb-5">Send Your First 1000 Emails Free</p>
 
                 {/* Button */}
-                <NavLink to="login" className="mt-4 px-6 py-3 bg-black text-white text-lg font-semibold rounded-md hover:bg-gray-800 transition"
+                <NavLink to="login" className="mt-7 px-6 py-3 bg-black text-white text-lg font-semibold rounded-md hover:bg-gray-800 transition"
                 >
                     Get Started
                 </NavLink>
