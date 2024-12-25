@@ -22,14 +22,14 @@
     display: flex;
     justify-content: space-between;
     /* width: 100%; */
-    /* height: 50vh; */
+    height: 30vh;
     gap: 2rem;
 }
 .email-body-form-row div{
     display: flex;
     flex-direction: column;
-    width: 50%;
-    height: 50vh;
+    width: 100%;
+    height: 100%;
 
 }
 .email-body-form-row div label{
@@ -38,7 +38,7 @@
 }
 
 
-.email-body-form-row div textarea{
+.email-body-form-row div textarea,.html-preview{    
     outline: 2px solid black;
     border-radius: 1rem;
 }

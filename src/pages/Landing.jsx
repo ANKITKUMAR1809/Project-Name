@@ -1,6 +1,19 @@
 import React from 'react'
+import { useContext ,useEffect  } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+
 const Landing = () => {
+    const { isLogged } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLogged) {
+            navigate('/dashboard');
+        }
+    }, [isLogged, navigate]);
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 via-purple-100 to-white">
             <div className="text-center max-w-lg">

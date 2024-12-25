@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
     const [email, setEmail] = useState("");
-    const [isLoading, setIsLoading]=useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null); // State to display errors
     const navigate = useNavigate(); // React Router navigation hook
@@ -42,8 +42,8 @@ const Login = () => {
                 setError("Something went wrong. Please try again later.");
                 toast.error("Something went wrong. Please try again later.");
             }
-        }finally{
-            setIsLoading(false); 
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -123,7 +123,7 @@ const Login = () => {
                             className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md shadow-sm transition focus:outline-none focus:ring-2 focus:ring-purple-500"
                         >
                             Sign In
-                        </button>:
+                        </button> :
                             <div className="w-full bg-purple-600  text-white font-bold py-2 px-4 rounded-md shadow-sm text-center">Loading...</div>}
                     </div>
                 </form>

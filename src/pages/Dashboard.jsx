@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext} from 'react';
 import Sidebar from '../components/Sidebar';
 import './css/Dashboard.css';
-import { Trash2,CircleUserRound } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+import { Trash2, CircleUserRound } from "lucide-react";
 import { toast } from "react-toastify";
-import { Link,NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 
 const Dashboard = () => {
-  const [plan, setPlan] = useState("free")
-  const [user, setUser] = useState(false)
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [profileuser, setprofileUser] = useState(false)
   const [isPopupOpen, setIsPopupOpen] = useState(false); // For controlling the popup visibility
   const [emailsInput, setEmailsInput] = useState("");  // Stores the input value
   const [emails, setEmails] = useState([]); // Stores the array of email addresses
@@ -143,7 +146,11 @@ const Dashboard = () => {
       toast.error(error.response?.data?.message || "Error while sending email");
     }
   };
-
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  }
   useEffect(() => {
     fetchMails();
     fetchMailBodies();// Fetch emails when the component mounts
@@ -153,17 +160,24 @@ const Dashboard = () => {
     <>
       <Sidebar />
       <div className="selected-content">
-      <div className='dashboard-nav'>
-          <div className='relative cursor-pointer' onMouseEnter={() => setUser(true)} onMouseLeave={() => setUser(false)}>
-            <NavLink to='/profile'><h1 className='flex items-center gap-2 text-xl font-semibold' onClick={()=>navigate('/profile')}><CircleUserRound size={32} />Welcome, Ankit Kumar</h1></NavLink>
-            {user ? <div className='rounded-md user-over absolute top-8 py-4  w-[100%] h-[200px] flex flex-col items-center' onMouseLeave={() => setUser(false)}>
-                <div><CircleUserRound size={50} color="#ffffff" /></div>
-                <div className='my-2'><h1 className='text-white'>Username</h1></div>
-                <div className='my-4'><button className='btn'>Logout</button></div>
-            </div> : ""}
+        <div className='dashboard-nav'>
+          <div className='relative cursor-pointer' onMouseEnter={() => setprofileUser(true)} onMouseLeave={() => setprofileUser(false)}>
+
+            <h1 className='flex items-center gap-2 text-xl font-semibold' >
+              <CircleUserRound size={32} />Welcome, {user.name}</h1>
+
+            {profileuser ?
+              <div className='rounded-md user-over absolute top-8 py-4  w-[100%] h-[200px] flex flex-col items-center' onMouseLeave={() => setprofileUser(false)}>
+                <div>
+                  <NavLink to='/profile'>
+                    <CircleUserRound size={50} color="#ffffff" /></NavLink>
+                </div>
+                <div className='my-2'><h1 className='text-white'>{user.name}</h1></div>
+                <div className='my-4'><button className='btn' onClick={logout}>Logout</button></div>
+              </div> : ""}
           </div>
-          <p className='font-semibold text-xl' onMouseOver={() => setPlan("Upgrade")} onMouseLeave={() => setPlan("Free")}>Plan: {plan}</p>
-          <p className='hidden md:block'>Created At: 12/10/2024, 10:39:46 PM</p>
+          <p className='font-semibold text-xl'>Plan: {user.plan}</p>
+          <p className='hidden md:block font-semibold text-xl'>Created At: {user.createdAt}</p>
         </div>
 
 

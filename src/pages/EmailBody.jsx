@@ -237,7 +237,7 @@ const EmailBody = () => {
       toast.success("Email body deleted successfully!");
       getEmailBodies(); // Refresh the list after deletion
     } catch (e) {
-      toast.error("Failed to delete email body"+ e.message);
+      toast.error("Failed to delete email body" + e.message);
     }
   };
 
@@ -261,9 +261,11 @@ const EmailBody = () => {
         <div>
           <div className="email-body-heading">
             <h1>Email Template Editor</h1>
-            {isLoading ?
-              <div className="btn text-xs">loading...</div> :
-              <button className='btn' onClick={handleSubmit}>Save Changes</button>}
+            {isLoading ? (
+              <div className="btn text-xs">loading...</div>
+            ) : (
+              <button className='btn' onClick={handleSubmit}>Save Changes</button>
+            )}
           </div>
           <form className='email-body-form'>
             <div>
@@ -277,7 +279,7 @@ const EmailBody = () => {
                 required
               />
             </div>
-            <div className='email-body-form-row my-4'>
+            <div className='email-body-form-row mt-4'>
               <div>
                 <label htmlFor="hc">HTML Content</label>
                 <textarea
@@ -291,13 +293,11 @@ const EmailBody = () => {
               </div>
               <div>
                 <label htmlFor="preview">Preview</label>
-                <textarea
-                  name="preview"
+                <div
                   id="preview"
-                  rows={10}
-                  value={form.hc}
-                  readOnly
-                ></textarea>
+                  className="html-preview"
+                  dangerouslySetInnerHTML={{ __html: form.hc }}
+                ></div>
               </div>
             </div>
           </form>
@@ -338,3 +338,4 @@ const EmailBody = () => {
 };
 
 export default EmailBody;
+
